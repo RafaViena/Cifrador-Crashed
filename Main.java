@@ -1,26 +1,61 @@
 import java.util.Scanner;
 
+public class limpador {
 
-public class Main {
+    public static String limpar(String p) {
+        if (p == null) {
+            return "";
+        }
 
-public static void main(String[] args) {
+        String resultado = "";
+        for (int i = 0; i < p.length(); i++) {
+            char c = p.charAt(i);
 
- Scanner scanner = new Scanner(System.in);
+            // ignora espaço e pontuação manualmente
+            if (!Character.isWhitespace(c) && !isPontuacao(c)) {
+                resultado = resultado + c;
+            }
+        }
 
+        return resultado;
+    }
 
-    System.out.println("Bem Vindo esse é o crifrador devisate:");
-    String fraseorign = "QHSAVOIPOPRERRDTJIERSSMVGIEROEEMNAAARDAAANL";
+    public static boolean isPontuacao(char c) {
+        String pontuacao = ".,;:!?()[]{}\"'-";
+        return pontuacao.indexOf(c) != -1;
+    }
 
-    System.out.println(fraseorign);
-    
-    System.out.println("INFORME A FRASE");
-    String frase = scanner.nextLine();
+    public static void main(String[] args) {
+        Scanner ler = new Scanner(System.in);
 
-    String resultado = frase + " eu sou doido";
-    System.out.println(resultado);
+        int indice = 0;
 
+        System.out.println("Informe a palavra para cifrar:");
+        String p = ler.nextLine();
 
-scanner.close();
-}
+        String textoLimpo = limpar(p);
+        textoLimpo = textoLimpo.toUpperCase();
 
+        int tamanhoP = textoLimpo.length();
+
+        System.out.println("Texto limpo: " + textoLimpo);
+
+        String cifra = "";
+
+        for (int i = 0; i < tamanhoP; i++) {
+            char letra = textoLimpo.charAt(indice);
+
+            System.out.print("indice: " + indice + " Letra: " + letra);
+
+            indice = indice + 3;
+            if (indice >= tamanhoP) {
+                indice = indice % tamanhoP;
+            }
+
+            cifra = cifra + letra;
+        }
+
+        System.out.println();
+        System.out.println(cifra);
+    }
 }
